@@ -1,0 +1,10 @@
+{
+  "name": "nlw",
+  "version": "1.0.0",
+  "repository": "https://github.com/Rafaellarsa/proffy.git",
+  "author": "Rafaellarsa <46501003+Rafaellarsa@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
