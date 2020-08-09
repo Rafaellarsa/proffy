@@ -1,3 +1,6 @@
+//yarn run dev
+
+//Dados
 const proffys = [
     {
         name: "Diego Fernandes",
@@ -20,37 +23,76 @@ const proffys = [
         weekday: [0],
         time_from: [720],
         time_to: [1220]
+    },
+    {
+        name: "Rebeca Nara",
+        avatar: "https://scontent.fnat1-1.fna.fbcdn.net/v/t31.0-8/28060952_1932515716776388_8567619608917130283_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=FWKZPmPgKFsAX-pmksm&_nc_oc=AQlmzFTlMflo7FZ1DGZ_L3qFVyxN-uMUd_8Ivsi1PvN9ArYXBDVk1iaZM0jFhgRnpko&_nc_ht=scontent.fnat1-1.fna&oh=53aee372cb79654e1b1629d4ad1cf72c&oe=5F56093D",
+        whatsapp: "899876543534",
+        bio: "Ainda tenho que pensar em algo criativo.",
+        subject: "Engenharia",
+        cost: "999999",
+        weekday: [0],
+        time_from: [720],
+        time_to: [1220]
     }
 ]
 
+const subjects = [
+    "Artes",
+    "Biologia",
+    "Ciências",
+    "Educação Física",
+    "Física",
+    "Geografia",
+    "História",
+    "Matemática",
+    "Português",
+    "Química",
+]
+
+const weekdays = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+]
+
+//Funcionalidades
 function pageLanding(req, res) {
     return res.render("index.html")
 }
 
 function pageStudy(req, res) {
-    return res.render("study.html", { proffys })
+    const filter = req.query
+    return res.render("study.html", { proffys, filter, subjects, weekdays })
 }
 
 function pageGiveClasses(req, res) {
-    return res.render("give-classes.html")
+    const dados = req.query
+    return res.render("give-classes.html", { filter, subjects, weekdays })
 }
 
+//servidor
 const express = require("express")
 const server = express()
-const nunjucks = require("nunjucks")
 
 //configurar nunjucks
+const nunjucks = require("nunjucks")
 nunjucks.configure("src/views", {
     express: server,
     noCache: true
 })
 
+//Início e configuração do servidor
 server
-//configurar arquivos estáticos (css, scripts, imagens)
+//Configuração dos arquivos estáticos (css, scripts, imagens)
 server.use(express.static("public"))
-//rotas da aplicação
+//Rotas da aplicação
 .get("/", pageLanding)
 .get("/study", pageStudy)
 .get("/give-classes", pageGiveClasses)
-
+//Start do servidor
 .listen(5500)
