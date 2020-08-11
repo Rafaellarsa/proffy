@@ -1,4 +1,4 @@
-module.exports = async function(db, { proffyValue, classValue, classScheduleValues }) {
+module.exports = async function(db, {proffyValue, classValue, classScheduleValues}) {
     //Inserir dados na tabela de proffys
     const insertedProffy = await db.run(`
         INSERT INTO proffys (
@@ -39,13 +39,12 @@ module.exports = async function(db, { proffyValue, classValue, classScheduleValu
                 time_to
             ) VALUES (
                 "${class_id}",
-                ${classScheduleValue.weekday},
-                ${classScheduleValue.time_from},
-                ${classScheduleValue.time_to}
+                "${classScheduleValue.weekday}",
+                "${classScheduleValue.time_from}",
+                "${classScheduleValue.time_to}"
             );
         `)
-    })
-    
+    })  
     //Executar todos os db.runs() dos class_schedule
     await Promise.all(insertedAllClassScheduleValues)
 }
