@@ -1,5 +1,6 @@
 //yarn run dev
 
+const PORT = process.env.PORT || 3000;
 const express = require("express")
 const server = express()
 
@@ -24,4 +25,4 @@ server.use(express.static("public"))
 .get("/give-classes", pageGiveClasses)
 .post("/save-classes", saveClasses)
 //Start do servidor
-.listen(3000)
+.listen(PORT)
